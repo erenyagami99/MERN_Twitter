@@ -101,11 +101,9 @@ export const updateUser = async (req, res) => {
       (!newPassword && currentPassword) ||
       (!currentPassword && newPassword)
     ) {
-      return res
-        .status(400)
-        .json({
-          error: "Please provide both current password and new password",
-        });
+      return res.status(400).json({
+        error: "Please provide both current password and new password",
+      });
     }
     if (currentPassword && newPassword) {
       const isMatch = await bcrypt.compare(currentPassword, user.password);
@@ -140,7 +138,6 @@ export const updateUser = async (req, res) => {
       const uploadedResponse = await cloudinary.uploader.upload(coverImg);
       coverImg = uploadedResponse.secure_url;
     }
-    console.log("hi");
     user.fullName = fullName || user.fullName;
     user.email = email || user.email;
     user.username = username || user.username;
